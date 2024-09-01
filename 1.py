@@ -52,7 +52,7 @@ class MyForm(QMainWindow):
         self.canvas.axes.cla()
         self.canvas.axes.imshow(self.zdata)
         self.canvas.axes.set_title("Waiting for COM data...", fontsize = "20")
-        ##self.update_graph()
+        ##
         
         self.ui.textEdit.append('Standby...')
         
@@ -98,30 +98,42 @@ class MyForm(QMainWindow):
                                 [1.3, 1.2, 0.0, 0.0, 0.0, 3.2, 5.1, 2.0],
                                 [0.1, 2.0, 0.0, 1.4, 0.0, 1.9, 6.3, 2.0],
                                 [1,2,3,4,1,2,3,4]])
+        rawdata = str(data)
+        rawdata = rawdata.split(',')
+        floatdata = np.asarray(rawdata, dtype=float)
         
-        
-        try:
-            rawdata = str(data)
-            rawdata = rawdata.split(',')
-            rawdata = [int(i) for i in rawdata]
-            self.zdata = np.array(np.array_split(rawdata,8))
-            self.canvas.axes.imshow(self.zdata)
-        except:
-            self.zdata = np.array(np.array_split([0]*64, 8))
-        
-        
+        ##for i in rawdata:
+        ##    i= float(i)
+        ##rawdata = [int(i) for i in rawdata]
         self.canvas.axes.cla()
-        self.canvas.axes.imshow(self.zdata)
+        self.zdata = np.array(np.array_split(floatdata,8))
         
+        self.canvas.axes.imshow(self.zdata)
+        ##try:
+           ## rawdata = str(data)
+           ## rawdata = rawdata.split(',')
+           ## rawdata = [int(i) for i in rawdata]
+          ##  (rawdata)
+          ##  self.zdata = np.array(np.array_split(rawdata,8))
+          ##  self.canvas.axes.imshow(self.zdata)
+        ##except:
+          ##  self.zdata = np.array(np.array_split([0]*64, 8))
+        
+        
+        
+        ##self.canvas.axes.cla()
+        ##self.canvas.axes.imshow(self.zdata,data=float)
+        l = range(8)
+        for i in l:
+            for j in l:
+                print(self.zdata[i,j])
+                text = self.canvas.axes.text(j,i,self.zdata[i,j], fontsize="15" , ha="center", va="center", color="w")
         
         self.canvas.axes.set_title("Displaying Graphical data", fontsize = "20")
         
         
         ##adding values to boxes
-        l = range(8)
-        for i in l:
-            for j in l:
-                text = self.canvas.axes.text(j,i,self.zdata[i,j], fontsize="15" , ha="center", va="center", color="w")
+       
         
         self.canvas.axes.set_box_aspect(1)
         self.canvas.draw()
