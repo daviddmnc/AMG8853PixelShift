@@ -9,7 +9,7 @@ void setup() {
   Wire.begin();
   // Library assumes "Wire" for I2C but you can pass something else with begin() if you like
   grideye.begin(0x68,Wire);
-  // Pour a bowl of serial
+  // Pour a bowl of serial 
   Serial.begin(9600);
 
 }
