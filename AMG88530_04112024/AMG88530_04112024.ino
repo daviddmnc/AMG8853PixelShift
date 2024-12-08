@@ -42,17 +42,14 @@ void loop() {
 
   if (move == true){
       /*Read the first square*/
-    delay(1000);
-    Serial.println();
-
     for(unsigned char i = 0; i < 63; i++){
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(21);
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
     
-    delay(1000);
+    delay(1000)
     
     
     
@@ -69,10 +66,9 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(22);
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
-
-    delay(1000);
+    delay(1000)
 
 
     digitalWrite(dirPin2,HIGH);
@@ -89,9 +85,9 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(23);
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
-    delay(1000);
+    delay(1000)
     
     digitalWrite(dirPin1,HIGH);
     for(int x = 0; x < 2; x++) {
@@ -107,9 +103,9 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(24);
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
-    delay(1000);
+    delay(1000)
 
 
     move = false; 
