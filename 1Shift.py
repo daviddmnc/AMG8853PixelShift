@@ -48,6 +48,7 @@ class MyForm(QMainWindow):
         self.ui.StartComButton.pressed.connect(self.open_Com)
         self.ui.StopComButton.pressed.connect(self.close_Com)
         self.ui.checkBox.stateChanged.connect(self.display_Raw_Data)
+        self.ui.pushButton_2.pressed.connect(self.combine_images)
         
         self.canvas = MplCanvas()
         self.canvas2 = MplCanvas()
@@ -80,8 +81,15 @@ class MyForm(QMainWindow):
         
         self.ui.textEdit.append('Standby...')
         global passx 
-        passx = 1 
-        
+        passx = 1
+        global image1
+        image1 = np.array(np.array_split([0]*64, 8)) 
+        global image2 
+        image2 = np.array(np.array_split([0]*64, 8)) 
+        global image3
+        image3 = np.array(np.array_split([0]*64, 8)) 
+        global image4
+        image4 = np.array(np.array_split([0]*64, 8)) 
            
     def open_Com(self):
         self.returnVal['com_port']=self.ui.COMPortBox.currentText()
@@ -119,6 +127,10 @@ class MyForm(QMainWindow):
         
     def update_graph(self,data):
         global passx
+        global image1
+        global image2
+        global image3
+        global image4
         """
         self.zdata = np.array([[0.8, 2.4, 2.5, 3.9, 0.0, 4.0, 0.0, 2.5],
                                 [2.4, 0.0, 4.0, 1.0, 2.7, 0.0, 0.0, 4.0],
@@ -148,6 +160,20 @@ class MyForm(QMainWindow):
             
         self.canvas.axes.cla()
         self.zdata = np.array(np.array_split(floatdata,8))
+        
+        
+        ##Saving the matrices
+        if passx==1:
+            image1 = self.zdata
+        elif passx==2:
+            image2 = self.zdata
+        elif passx==3:
+            image3 = self.zdata
+        elif passx==4:
+            image4 = self.zdata
+        
+        
+        
         
         self.canvas.axes.imshow(self.zdata)
         ##try:
@@ -189,6 +215,24 @@ class MyForm(QMainWindow):
         else:
             self.ui.textEdit.setVisible(False)
 
+    def combine_images(self):
+        if image4.all() != 0:
+            self.ui.textEdit.append(str(passx))
+            self.ui.textEdit.append(str(image4))
+            PixelShifted = np.array(np.array_split([0]*256,16))
+            l = 16 #matrice size
+            for i in range(0,l,2):
+                for j in range(0,l,2):
+                    PixelShifted[i,j] = image1[i/2,j/2]
+            self.canvasFin.axes.cla()
+            self.canvas.axes.imshow(PixelShifted)
+            
+            
+        else:
+            self.ui.textEdit.append("Not enough Images generated!!")
+            return
+        
+        
         
 class Worker(QThread):
     change_value = Signal(str)
