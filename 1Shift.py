@@ -217,16 +217,20 @@ class MyForm(QMainWindow):
 
     def combine_images(self):
         if image4.all() != 0:
-            self.ui.textEdit.append(str(passx))
-            self.ui.textEdit.append(str(image4))
             PixelShifted = np.array(np.array_split([0]*256,16))
             l = 16 #matrice size
             for i in range(0,l,2):
                 for j in range(0,l,2):
-                    PixelShifted[i,j] = image1[i/2,j/2]
+                    k = i//2
+                    n = j//2
+                    PixelShifted[i,j] = image1[k,n]
+                    PixelShifted[i,j+1] = image2[k,n]
+                    PixelShifted[i+1,j] = image3[k,n]
+                    PixelShifted[i+1,j+1] = image4[k,n]
             self.canvasFin.axes.cla()
-            self.canvas.axes.imshow(PixelShifted)
-            
+            self.canvasFin.axes.imshow(PixelShifted)
+            self.canvasFin.axes.set_box_aspect(1)
+            self.canvasFin.draw()
             
         else:
             self.ui.textEdit.append("Not enough Images generated!!")

@@ -45,11 +45,11 @@ void loop() {
     delay(1000);
     Serial.println();
 
-    for(unsigned char i = 0; i < 63; i++){
+    for(unsigned char i = 63; i > 0; i--){
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(0));
     Serial.println();
     
     delay(1000);
@@ -65,11 +65,11 @@ void loop() {
     }
     digitalWrite(stepPin1,LOW); 
     /*Read the second square*/
-    for(unsigned char i = 0; i < 63; i++){
+    for(unsigned char i = 63; i > 0; i--){
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(0));
     Serial.println();
 
     delay(1000);
@@ -85,11 +85,11 @@ void loop() {
     digitalWrite(stepPin2,LOW);
     
     /*Read the third square*/
-    for(unsigned char i = 0; i < 63; i++){
+    for(unsigned char i = 63; i > 0; i--){
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(0));
     Serial.println();
     delay(1000);
     
@@ -103,11 +103,11 @@ void loop() {
     digitalWrite(stepPin1,LOW); 
 
     /*Read the forth square*/
-    for(unsigned char i = 0; i < 63; i++){
+    for(unsigned char i = 63; i > 0; i--){
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(0));
     Serial.println();
     delay(1000);
 

@@ -49,7 +49,7 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
     
     delay(1000);
@@ -69,7 +69,7 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
 
     delay(1000);
@@ -89,7 +89,7 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
     delay(1000);
     
@@ -107,7 +107,7 @@ void loop() {
     Serial.print(grideye.getPixelTemperature(i));
     Serial.print(",");
     }
-    Serial.print(grideye.getPixelTemperature(64));
+    Serial.print(grideye.getPixelTemperature(63));
     Serial.println();
     delay(1000);
 
